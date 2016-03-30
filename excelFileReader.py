@@ -1,19 +1,18 @@
+import binarisationVariables as BV
+
 from xlrd import open_workbook
 
-numberOfEntries = 0
-numberOfAttribute = 0
-items = []
-
-def readFile():
-	wb = open_workbook('sample.xls')
+def readFile(fileName):
+	BV.items = []
+	wb = open_workbook(fileName)
 	for sheet in wb.sheets():
-		numberOfEntries = sheet.nrows
-		numberOfAttribute = sheet.ncols
+		BV.numberOfEntries = sheet.nrows
+		BV.numberOfAttributes = sheet.ncols
 
 		rows = []
-		for row in range(numberOfEntries):
+		for row in range(BV.numberOfEntries):
 			values = []
-			for col in range(numberOfAttribute):
+			for col in range(BV.numberOfAttributes):
 				value  = (sheet.cell(row,col).value)
 				try:
 				   value = float((value))
@@ -22,11 +21,6 @@ def readFile():
 				finally:
 					values.append(value)
 			#print values
-			items.append(values)
+			BV.items.append(values)
 
-	return (items, numberOfAttribute, numberOfEntries)
-
-(items, numberOfAttribute, numberOfEntries) = readFile()
-
-for i in xrange(numberOfEntries):
-	print(items[i])
+	return
