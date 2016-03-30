@@ -19,7 +19,7 @@ def generatePattern():
 		if item[BV.numberOfAttributes - 1] == 1:
 			val = convertBinaryToInt(item)
 			dict[val] = 1
-	print dict
+#	print dict
 	json.dump(dict, open("patterns.txt","w"))
 
 generatePattern()

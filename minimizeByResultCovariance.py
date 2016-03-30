@@ -49,4 +49,4 @@ def minimizeByResultCovariance(threshold):
 		i = i + 1
 	BV.uselessPoints = uselessPoints
 	createMinimizedSupportSetOutput(uselessPoints)
-	print BV.uselessPoints
+#	print BV.uselessPoints

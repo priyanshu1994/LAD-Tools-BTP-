@@ -17,7 +17,7 @@ def testInstance():
 	column = 0
 	temp = 0
 	value = 0
-	print dict
+#	print dict
 	for item in BV.items:
 		i = 0
 		column = 0
@@ -35,7 +35,7 @@ def testInstance():
 			temp = 1
 		else:
 			temp = 0
-		print value
+#		print value
 		worksheet.write(row,0,temp)
 		row = row + 1
 	workbook.save('Output.xls')
