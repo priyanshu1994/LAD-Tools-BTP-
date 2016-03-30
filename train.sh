@@ -1,0 +1,3 @@
+python binarisationModule.py
+python supportSetMinimization.py
+python patternGenerationModule.py
