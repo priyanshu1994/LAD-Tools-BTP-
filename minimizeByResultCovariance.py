@@ -32,8 +32,6 @@ def createMinimizedSupportSetOutput(uselessPoints):
 		row = row + 1
 	workbook.save('minimizedSupportSetOutput.xls')
 
-
-
 def minimizeByResultCovariance(threshold):
 	uselessPoints = []
 	i = 0
@@ -43,10 +41,9 @@ def minimizeByResultCovariance(threshold):
 		# print[row[BV.numberOfAttributes-1] for row in BV.items]
 		# print np.corrcoef([row[i] for row in BV.items],[row[BV.numberOfAttributes-1] for row in BV.items])
 		correlationCoef = abs((np.corrcoef([row[i] for row in BV.items],[row[BV.numberOfAttributes-1] for row in BV.items]))[0][1])
-		#print correlationCoef
+		# print correlationCoef
 		if correlationCoef < threshold:
 			uselessPoints.append(i)
 		i = i + 1
 	BV.uselessPoints = uselessPoints
 	createMinimizedSupportSetOutput(uselessPoints)
-#	print BV.uselessPoints
