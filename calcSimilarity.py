@@ -6,7 +6,8 @@ from xlwt import easyxf
 import json
 
 def calcSimilarity(key, value):
-	with open("finalCorrelationValues.txt") as fileObj: correlationValues = json.load(fileObj)
+	key = int(key)
+	with open("finalCorrelationValue.txt") as fileObj: correlationValues = json.load(fileObj)
 	num = 0
 	den = 0
 	idx = len(correlationValues)
@@ -15,13 +16,13 @@ def calcSimilarity(key, value):
 		if key%2 != 0:
 			if key%2 == value%2:
 				num += correlationValues[idx]
-			else
+			else:
 				num -= correlationValues[idx]
 			den += correlationValues[idx]
 		elif (key/2)%2 != 0:
 			if (key/2)%2 == (value/2)%2:
 				num += correlationValues[idx]
-			else
+			else:
 				num -= correlationValues[idx]
 			den += correlationValues[idx]
 		idx = idx-1

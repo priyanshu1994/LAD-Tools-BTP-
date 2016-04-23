@@ -64,7 +64,7 @@ def createNewAttributes(correlatedAttributes):
 
 	return finalItems
 
-def createMinimizedSupportSetAttributeCorrOutput(newAttributesList, numberOfAttributes):
+def minimizedSupportSetAttributeOutput(newAttributesList, numberOfAttributes):
 	workbook = xlsxwriter.Workbook('minimizedSupportSetOutput.xls')
 	worksheet = workbook.add_worksheet()
 
@@ -100,4 +100,4 @@ def minimizeResultByAttributeCorrelation(threshold):
 
 	newAttributesList = createNewAttributes(correlatedAttributes)
 
-	createMinimizedSupportSetAttributeCorrOutput(newAttributesList, len(correlatedAttributes) + 1)
+	minimizedSupportSetAttributeOutput(newAttributesList, len(correlatedAttributes) + 1)

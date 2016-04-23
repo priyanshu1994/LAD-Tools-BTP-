@@ -25,7 +25,6 @@ def readExcelFile (fileName):
 					values.append(value)
 			items.append(values)
 
-	print items
 	return items
 
 def writeExcelFile (finalItems):

@@ -9,4 +9,4 @@ def generatePattern():
 	#basicPatternGeneration()
 	generateFrequentItemsets()
 
-generatePattern()
+	generatePattern()
