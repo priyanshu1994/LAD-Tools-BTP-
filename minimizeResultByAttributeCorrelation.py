@@ -42,12 +42,25 @@ def createNewAttributes(correlatedAttributes):
 					wt = wt - correlationCoef[attribute][BV.numberOfAttributes - 1]
 				else:
 					wt = wt + correlationCoef[attribute][BV.numberOfAttributes - 1]
-			if wt > 0:
+			if wt >= 0:
 				finalInstance.append(1)
 			else:
 				finalInstance.append(0)
 		finalInstance.append(instance[BV.numberOfAttributes - 1])
 		finalItems.append(finalInstance)
+
+	correlation = []
+	i = 0
+	numberOfAttributes = len(correlatedAttributes)
+	while i < numberOfAttributes:
+		correlationCoef = abs((np.corrcoef([row[i] for row in finalItems],[row[numberOfAttributes] for row in finalItems]))[0][1])
+		correlation.append(correlationCoef)
+		i = i + 1
+
+	fileObj = open("finalCorrelationValue.txt","w")	
+	json.dump(correlation, fileObj)
+	fileObj.close()
+
 	return finalItems
 
 def createMinimizedSupportSetAttributeCorrOutput(newAttributesList, numberOfAttributes):
@@ -62,7 +75,6 @@ def createMinimizedSupportSetAttributeCorrOutput(newAttributesList, numberOfAttr
 				column = column + 1
 		row = row + 1
 	workbook.save('minimizedSupportSetAttributeCorrOutput.xls')
-
 
 def minimizeResultByAttributeCorrelation(threshold):
 	uselessPoints = []
@@ -81,7 +93,10 @@ def minimizeResultByAttributeCorrelation(threshold):
 
 	correlatedAttributes = getSetsOfCorrelatedAttributes(threshold)
 
+	# print type(correlationCoef)
+
 	json.dump(correlatedAttributes, open("correlatedAttributesList.txt","w"))
+	json.dump(correlationCoef.tolist(), open("attributeCorrelationList.txt","w"))
 
 	newAttributesList = createNewAttributes(correlatedAttributes)
 

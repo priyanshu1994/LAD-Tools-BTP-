@@ -3,11 +3,13 @@ import json
 
 def removeUselessPoints():
 	with open("cutPoints.txt") as fileObj: cutPointsList = json.load(fileObj)
+
 	attributeNum = 0
 	uselessPointsNum = 0
 	cutpointRow = 0
 	cutpointCol = 0
 	uselessPointsSize = len(BV.uselessPoints)
+	
 	for cutPoints in cutPointsList:
 		if uselessPointsNum == uselessPointsSize:
 			break
@@ -23,6 +25,7 @@ def removeUselessPoints():
 			cutpointCol = cutpointCol + 1
 			attributeNum = attributeNum + 1
 		cutpointRow = cutpointRow + 1
+	
 	fileObj = open("reducedCutpoints.txt","w")	
 	json.dump(cutPointsList,fileObj)
 	fileObj.close()

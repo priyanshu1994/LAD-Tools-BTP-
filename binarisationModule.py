@@ -22,7 +22,7 @@ def binariseEntries():
 
 	# print BV.cutPointsList
 	fileObj = open("cutPoints.txt","w")	
-	json.dump(BV.cutPointsList,fileObj)
+	json.dump(BV.cutPointsList, fileObj)
 	fileObj.close()
 	generateBinaryAttributes()
 
