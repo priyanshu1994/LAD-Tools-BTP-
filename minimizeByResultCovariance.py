@@ -1,5 +1,6 @@
 import binarisationVariables as BV
 import numpy as np
+from removeUselessPoints import *
 from xlutils.copy import copy
 from xlrd import open_workbook
 from xlwt import easyxf
@@ -37,7 +38,7 @@ def minimizeByResultCovariance(threshold):
 	correlation = []
 	i = 0
 	while i < BV.numberOfAttributes - 1:
-		correlationCoef = abs((np.corrcoef([row[i] for row in BV.items],[row[BV.numberOfAttributes-1] for row in BV.items]))[0][1])
+		correlationCoef = abs(np.nan_to_num((np.corrcoef([row[i] for row in BV.items],[row[BV.numberOfAttributes-1] for row in BV.items])))[0][1])
 		if correlationCoef < threshold:
 			uselessPoints.append(i)
 		else:
@@ -45,6 +46,7 @@ def minimizeByResultCovariance(threshold):
 		i = i + 1
 	BV.uselessPoints = uselessPoints
 	createMinimisedSupportSetOutput(uselessPoints)
+	removeUselessPoints()
 
 	fileObj = open("finalCorrelationValue.txt","w")	
 	json.dump(correlation, fileObj)

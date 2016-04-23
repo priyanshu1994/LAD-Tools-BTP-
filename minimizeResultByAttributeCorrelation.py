@@ -53,7 +53,7 @@ def createNewAttributes(correlatedAttributes):
 	i = 0
 	numberOfAttributes = len(correlatedAttributes)
 	while i < numberOfAttributes:
-		correlationCoef = abs((np.corrcoef([row[i] for row in finalItems],[row[numberOfAttributes] for row in finalItems]))[0][1])
+		correlationCoef = abs(np.nan_to_num(np.corrcoef([row[i] for row in finalItems],[row[numberOfAttributes] for row in finalItems]))[0][1])
 		correlation.append(correlationCoef)
 		i = i + 1
 
@@ -89,8 +89,7 @@ def minimizeResultByAttributeCorrelation(threshold):
 		i = i + 1
 
 	global correlationCoef
-	correlationCoef = np.corrcoef(data)
-
+	correlationCoef = np.nan_to_num(np.corrcoef(data))
 	correlatedAttributes = getSetsOfCorrelatedAttributes(threshold)
 
 	# print type(correlationCoef)
