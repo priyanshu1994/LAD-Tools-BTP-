@@ -4,12 +4,13 @@ from removeUselessPoints import *
 from xlutils.copy import copy
 from xlrd import open_workbook
 from xlwt import easyxf
+import xlsxwriter
 import json
 
 def createMinimisedSupportSetOutput(uselessPoints):
-	readWorkbook = open_workbook('minimizedSupportSetOutput.xls')
-	workbook = copy(readWorkbook)
-	worksheet = workbook.get_sheet(0)
+	workbook = xlsxwriter.Workbook('minimizedSupportSetOutput.xls')
+	worksheet = workbook.add_worksheet()
+
 	row = 0
 	column = 0
 	temp = 0
@@ -31,7 +32,7 @@ def createMinimisedSupportSetOutput(uselessPoints):
 			column = column + 1
 			i = i + 1
 		row = row + 1
-	workbook.save('minimizedSupportSetOutput.xls')
+	workbook.close()
 
 def minimizeByResultCovariance(threshold):
 	uselessPoints = []

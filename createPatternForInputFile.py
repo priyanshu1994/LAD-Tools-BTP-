@@ -3,6 +3,7 @@ import json
 from xlutils.copy import copy
 from xlrd import open_workbook
 from xlwt import easyxf
+import xlsxwriter
 
 def readExcelFile (fileName):
 	items = []
@@ -28,9 +29,9 @@ def readExcelFile (fileName):
 	return items
 
 def writeExcelFile (finalItems):
-	readWorkbook = open_workbook('convertedTestData.xls')
-	workbook = copy(readWorkbook)
-	worksheet = workbook.get_sheet(0)
+	workbook = xlsxwriter.Workbook('convertedTestData.xls')
+	worksheet = workbook.add_worksheet()
+
 	row = 0
 	for item in finalItems:
 		column = 0
@@ -38,7 +39,7 @@ def writeExcelFile (finalItems):
 			worksheet.write(row, column, value)
 			column = column + 1
 		row = row + 1
-	workbook.save('convertedTestData.xls')
+	workbook.close()
 
 def binarizeInputData (fileName):
 	items = readExcelFile(fileName)
@@ -78,11 +79,10 @@ def reduceAttributeUsingAttributesCorr(fileName):
 				else:
 					wt = wt + correlationCoef[attribute][-1]
 			if wt >= 0:
-				finalItem.append(wt)
+				finalItem.append(1)
 			else:
-				finalItem.append(wt)
+				finalItem.append(0)
 		finalItems.append(finalItem)
-	print finalItems
 	return finalItems
 
 def minimiseByAttriResultCorr(fileName):

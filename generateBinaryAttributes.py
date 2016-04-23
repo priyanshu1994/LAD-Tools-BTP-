@@ -2,11 +2,12 @@ import binarisationVariables as BV
 from xlutils.copy import copy
 from xlrd import open_workbook
 from xlwt import easyxf
+import xlsxwriter
 
 def generateBinaryAttributes():
-	readWorkbook = open_workbook('binarizedOutput.xls')
-	workbook = copy(readWorkbook)
-	worksheet = workbook.get_sheet(0)
+	workbook = xlsxwriter.Workbook('binarisedOutput.xls')
+	worksheet = workbook.add_worksheet()
+
 	row = 0
 	column = 0
 	temp = 0
@@ -26,4 +27,4 @@ def generateBinaryAttributes():
 				column = column + 1
 			i = i + 1
 		row = row + 1
-	workbook.save('binarizedOutput.xls')
+	workbook.close()

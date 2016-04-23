@@ -4,6 +4,7 @@ from xlutils.copy import copy
 from xlrd import open_workbook
 from xlwt import easyxf
 import json
+import xlsxwriter
 
 reached = []
 correlationCoef = []
@@ -64,9 +65,9 @@ def createNewAttributes(correlatedAttributes):
 	return finalItems
 
 def createMinimizedSupportSetAttributeCorrOutput(newAttributesList, numberOfAttributes):
-	readWorkbook = open_workbook('minimizedSupportSetAttributeCorrOutput.xls')
-	workbook = copy(readWorkbook)
-	worksheet = workbook.get_sheet(0)
+	workbook = xlsxwriter.Workbook('minimizedSupportSetOutput.xls')
+	worksheet = workbook.add_worksheet()
+
 	row = 0
 	for item in newAttributesList:
 		column = 0
@@ -74,7 +75,7 @@ def createMinimizedSupportSetAttributeCorrOutput(newAttributesList, numberOfAttr
 				worksheet.write(row, column, attribute)
 				column = column + 1
 		row = row + 1
-	workbook.save('minimizedSupportSetAttributeCorrOutput.xls')
+	workbook.close()
 
 def minimizeResultByAttributeCorrelation(threshold):
 	uselessPoints = []

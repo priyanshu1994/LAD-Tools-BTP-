@@ -5,8 +5,7 @@ from generateFrequentItemsets import *
 import json
 
 def generatePattern():
-	#readFile('minimizedSupportSetOutput.xls')
-	readFile('minimizedSupportSetAttributeCorrOutput.xls')
+	readFile('minimizedSupportSetOutput.xls')
 	#basicPatternGeneration()
 	generateFrequentItemsets()
 
