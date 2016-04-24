@@ -12,15 +12,17 @@ def readFile(fileName):
 		rows = []
 		for row in range(BV.numberOfEntries):
 			values = []
+			missing = False
 			for col in range(BV.numberOfAttributes):
 				value  = (sheet.cell(row,col).value)
 				try:
 				   value = float((value))
 				except ValueError:
-					pass #Default value not defined
+					missing = True
 				finally:
 					values.append(value)
 			#print values
-			BV.items.append(values)
-
+			if missing == False:
+				BV.items.append(values)
+		BV.numberOfEntries = len (BV.items)
 	return

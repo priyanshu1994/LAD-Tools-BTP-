@@ -4,3 +4,4 @@ numberOfAttributes = 0
 items = []
 uselessPoints = []
 cutPointsList = []
+isBinary = []
