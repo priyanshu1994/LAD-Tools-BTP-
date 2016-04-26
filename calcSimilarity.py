@@ -7,6 +7,7 @@ import json
 
 def calcSimilarity(key, value):
 	key = int(key)
+	value = int(value)
 	with open("finalCorrelationValue.txt") as fileObj: correlationValues = json.load(fileObj)
 	num = 0
 	den = 0
@@ -29,3 +30,5 @@ def calcSimilarity(key, value):
 		key = key/4
 		value = value/4
 	return num * 1.0 / den
+
+# print calcSimilarity(11184801,11184805)

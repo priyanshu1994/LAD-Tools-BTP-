@@ -3,9 +3,8 @@ from fp_growth import find_frequent_itemsets
 from excelFileReader import *
 import json
 
-def generateFrequentItemsets():
+def generateFrequentItemsets(minsup):
 	# print BV.items
-	minsup = 1
 	positiveTransactions = []
 	negativeTransactions = []
 	positiveFrequentItemsets = []
@@ -31,18 +30,24 @@ def generateFrequentItemsets():
 					transaction.append(count * 2 + 1)
 				count = count + 1
 			negativeTransactions.append(transaction)
-	for positiveFrequentItemset, positiveSupport in find_frequent_itemsets(positiveTransactions, minsup, True):
+	# print "here\n\n"
+	# print len(positiveTransactions)
+	# print len(negativeTransactions)
+	for positiveFrequentItemset, positiveSupport in find_frequent_itemsets(positiveTransactions, int(minsup * len(positiveTransactions)), True):
 		positiveFrequentItemsets.append(positiveFrequentItemset)
 		positiveSupports.append(positiveSupport)
-	for negativeFrequentItemset, negativeSupport in find_frequent_itemsets(negativeTransactions, minsup, True):
+	for negativeFrequentItemset, negativeSupport in find_frequent_itemsets(negativeTransactions, int(minsup * len(negativeTransactions)), True):
 		negativeFrequentItemsets.append(negativeFrequentItemset)
 		negativeSupports.append(negativeSupport)
+	# print "FP done\n\n"
 	# for itemset in positiveFrequentItemsets:
 	# 	print itemset
 	# print "negative"
 	# for itemset in negativeFrequentItemsets:
 	# 	print itemset
 	# print "done"
+	# print len(positiveFrequentItemsets)
+	# print len(negativeFrequentItemsets)
 	positiveDict = {}
 	negativeDict = {}
 	removePositive = {}
@@ -85,9 +90,10 @@ def generateFrequentItemsets():
 		for key in removeNegative:
 			if key in negativeDict:
 				del negativeDict[key]
+	# print "dumping\n\n"
 	json.dump(positiveDict, open("positiveFrequentItemsets.txt","w"))
 	json.dump(negativeDict, open("negativeFrequentItemsets.txt","w"))
-	json.dump(len(positiveFrequentItemsets), open("numOfPosResults.txt","w"))
-	json.dump(len(negativeFrequentItemsets), open("numOfNegResults.txt","w"))
+	json.dump(len(positiveTransactions), open("numOfPosResults.txt","w"))
+	json.dump(len(negativeTransactions), open("numOfNegResults.txt","w"))
 	# for itemset in find_frequent_itemsets(transactions, minsup):
 	#     print itemset

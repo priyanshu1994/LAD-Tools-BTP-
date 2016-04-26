@@ -8,13 +8,11 @@ import json
 import xlsxwriter
 
 def testInstance():
-	dict = json.load(open("patterns.txt"))
-	dict = {float(key) : value for (key, value) in dict.items()}
 	readFile("convertedTestData.xls")
 	
-	workbook = xlsxwriter.Workbook('Output.xls')
+	workbook = xlsxwriter.Workbook('output.xls')
 	worksheet = workbook.add_worksheet()
-	
+	output = []
 	row = 0
 	temp = 0
 	with open("positiveFrequentItemsets.txt") as fileObj: positiveFrequentItemsets = json.load(fileObj)
@@ -33,34 +31,59 @@ def testInstance():
 			else:
 				value = value + 2**(count+1)
 			count = count + 2
+			# print attribute
+		# print "\n"
 		for key in positiveFrequentItemsets:
-			if value & int(key) == key:
+			if value & int(key) == int(key):
 				pos = True
 		for key in negativeFrequentItemsets:
-			if value & int(key) == key:
+			if value & int(key) == int(key):
 				neg = True
 		if pos == True and neg == False:
+			output.append(1)
 			worksheet.write(row, 0, 1)
+			# print "Pos\n"
 		elif pos == False and neg == True:
+			output.append(0)
 			worksheet.write(row, 0, 0)
+			# print "Neg\n"
 		else:
 			maxPos = -1
 			maxNeg = -1
 			for key, times in positiveFrequentItemsets.iteritems():
+				temp = value
 				similarity = calcSimilarity(key,value)
 				closeness = similarity * times/numOfPosPatterns
+				# print "pos"
+				# print similarity
+				# print closeness
+				# print "Positive"
+				# print closeness
+				# print "\n\n"
 				if(closeness > maxPos):
 					maxPos = closeness
+			value = temp
 			for key, times in negativeFrequentItemsets.iteritems():
 				similarity = calcSimilarity(key,value)
 				closeness = similarity * times/numOfNegPatterns
+				# print "neg"
+				# print similarity
+				# print closeness
 				if(closeness > maxNeg):
 					maxNeg = closeness
+			# print item
+			# print value
+			# # print maxNeg
+			# # print maxPos
+			# print "\n"
 			if maxNeg > maxPos:
+				output.append(0)
 				worksheet.write(row, 0, 0)
 			else:
+				output.append(1)
 				worksheet.write(row, 0, 1)
 		row = row + 1
 	workbook.close()
+	json.dump(output, open("labels.txt","w"))
 
 testInstance()
