@@ -46,8 +46,8 @@ def generateFrequentItemsets(minsup):
 	# for itemset in negativeFrequentItemsets:
 	# 	print itemset
 	# print "done"
-	# print len(positiveFrequentItemsets)
-	# print len(negativeFrequentItemsets)
+	print len(positiveFrequentItemsets)
+	print len(negativeFrequentItemsets)
 	positiveDict = {}
 	negativeDict = {}
 	removePositive = {}

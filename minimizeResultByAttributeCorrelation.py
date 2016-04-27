@@ -4,10 +4,13 @@ from xlutils.copy import copy
 from xlrd import open_workbook
 from xlwt import easyxf
 import json
+import sys
 import xlsxwriter
 
 reached = []
 correlationCoef = []
+
+sys.setrecursionlimit(1500)
 
 def dfs(head, threshold):
 	ans = []
