@@ -10,7 +10,7 @@ import xlsxwriter
 reached = []
 correlationCoef = []
 
-sys.setrecursionlimit(1500)
+sys.setrecursionlimit(3000)
 
 def dfs(head, threshold):
 	ans = []
