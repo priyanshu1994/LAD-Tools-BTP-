@@ -6,7 +6,9 @@ import sys
 
 def minimizeSupportSet():
 	readFile('binarisedOutput.xls')
-	#minimizeByResultCovariance(0.1)
-	minimizeResultByAttributeCorrelation(float(sys.argv[1]))
+	if int(sys.argv[1]) == 1:	
+		minimizeByResultCovariance(float(sys.argv[2]) - 0.4)
+	else:
+		minimizeResultByAttributeCorrelation(float(sys.argv[2]))
 
 minimizeSupportSet()

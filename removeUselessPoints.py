@@ -6,26 +6,37 @@ def removeUselessPoints():
 
 	attributeNum = 0
 	uselessPointsNum = 0
-	cutpointRow = 0
-	cutpointCol = 0
 	uselessPointsSize = len(BV.uselessPoints)
-	
+	tempCutPointsList = []
+	markedList = []
+
 	for cutPoints in cutPointsList:
-		if uselessPointsNum == uselessPointsSize:
-			break
-		if attributeNum == BV.numberOfAttributes - 1:
-			continue
+		marked = []
 		for point in cutPoints:
-			if cutpointCol == len(cutPointsList[cutpointRow]):
-				break
-			if attributeNum == BV.uselessPoints[uselessPointsNum]:
-				cutPointsList[cutpointRow].remove(cutPointsList[cutpointRow][cutpointCol])
+			if uselessPointsNum < uselessPointsSize and attributeNum == BV.uselessPoints[uselessPointsNum]:
+				marked.append(1)
 				uselessPointsNum = uselessPointsNum + 1
-				cutpointCol = cutpointCol - 1
-			cutpointCol = cutpointCol + 1
+			else:
+				marked.append(0)
 			attributeNum = attributeNum + 1
+		markedList.append(marked)
+
+	cutpointRow = 0
+	i = 0
+	for marked in markedList:
+		vec = []
+		cutpointCol = 0
+		for var in marked:
+			i = i + 1
+			if var == 0:
+				vec.append(cutPointsList[cutpointRow][cutpointCol])
+			cutpointCol = cutpointCol + 1
 		cutpointRow = cutpointRow + 1
-	
+
+		tempCutPointsList.append(vec)
+
+	cutPointsList = tempCutPointsList
+
 	fileObj = open("reducedCutpoints.txt","w")	
 	json.dump(cutPointsList,fileObj)
 	fileObj.close()

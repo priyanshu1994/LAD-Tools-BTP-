@@ -12,7 +12,6 @@ def createMinimisedSupportSetOutput(uselessPoints):
 	worksheet = workbook.add_worksheet()
 
 	row = 0
-	column = 0
 	temp = 0
 	uselessPointsSize = len(uselessPoints)
 	for item in BV.items:
@@ -46,6 +45,7 @@ def minimizeByResultCovariance(threshold):
 			correlation.append(correlationCoef)
 		i = i + 1
 	BV.uselessPoints = uselessPoints
+
 	createMinimisedSupportSetOutput(uselessPoints)
 	removeUselessPoints()
 

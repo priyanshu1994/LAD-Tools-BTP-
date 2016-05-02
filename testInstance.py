@@ -33,6 +33,9 @@ def testInstance():
 			count = count + 2
 			# print attribute
 		# print "\n"
+		if value == 0:
+			print item
+			print "aaaaaaaaaaaaaaaaaaa"
 		for key in positiveFrequentItemsets:
 			if value & int(key) == int(key):
 				pos = True

@@ -29,6 +29,9 @@ def calcSimilarity(key, value):
 		idx = idx-1
 		key = key/4
 		value = value/4
-	return num * 1.0 / den
+	ans = 0
+	if den != 0:
+		ans = 0
 
+	return ans
 # print calcSimilarity(11184801,11184805)

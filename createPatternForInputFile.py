@@ -4,6 +4,7 @@ from xlutils.copy import copy
 from xlrd import open_workbook
 from xlwt import easyxf
 import xlsxwriter
+import sys
 
 def readExcelFile (fileName):
 	items = []
@@ -94,15 +95,19 @@ def minimiseByAttriResultCorr(fileName):
 	i = 0
 	for item in inputData:
 		finalItem = []
+		i = 0
 		for value in item:
-			for cutPoint in reducedCutpoints[i]:
+			for cutPoint in reducedCutPoints[i]:
 				if value < cutPoint:
 					finalItem.append(0)
 				else:
 					finalItem.append(1)
+			i = i + 1
 		finalItems.append(finalItem)
 	return finalItems
 
-finalItems = reduceAttributeUsingAttributesCorr ('test.xls')
-#finalItems = minimiseByAttriResultCorr (fileName)
+if int(sys.argv[1]) == 1:
+	finalItems = minimiseByAttriResultCorr ('test.xls')
+else:
+	finalItems = reduceAttributeUsingAttributesCorr ('test.xls')
 writeExcelFile (finalItems)

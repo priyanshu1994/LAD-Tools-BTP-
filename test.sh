@@ -1,5 +1,5 @@
 rm output.xls
-python createPatternForInputFile.py
+python createPatternForInputFile.py $1
 python testInstance.py
 #libreoffice --calc Output.xls
 python calcAccuracy.py
