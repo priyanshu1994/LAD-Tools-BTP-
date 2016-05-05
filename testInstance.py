@@ -31,11 +31,7 @@ def testInstance():
 			else:
 				value = value + 2**(count+1)
 			count = count + 2
-			# print attribute
-		# print "\n"
-		if value == 0:
-			print item
-			print "aaaaaaaaaaaaaaaaaaa"
+
 		for key in positiveFrequentItemsets:
 			if value & int(key) == int(key):
 				pos = True

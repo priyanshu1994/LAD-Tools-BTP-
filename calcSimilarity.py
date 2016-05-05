@@ -31,7 +31,6 @@ def calcSimilarity(key, value):
 		value = value/4
 	ans = 0
 	if den != 0:
-		ans = 0
+		ans = num * 1.0 / den
 
 	return ans
-# print calcSimilarity(11184801,11184805)
